@@ -1,0 +1,6 @@
+C:\Users\1\Desktop\GitReps\EPAM_Ext_Lab_Q2_2017_Likhvar_Dmitriy\HMT_01\Task02\bin\Debug\Task02.exe.config
+C:\Users\1\Desktop\GitReps\EPAM_Ext_Lab_Q2_2017_Likhvar_Dmitriy\HMT_01\Task02\bin\Debug\Task02.exe
+C:\Users\1\Desktop\GitReps\EPAM_Ext_Lab_Q2_2017_Likhvar_Dmitriy\HMT_01\Task02\bin\Debug\Task02.pdb
+C:\Users\1\Desktop\GitReps\EPAM_Ext_Lab_Q2_2017_Likhvar_Dmitriy\HMT_01\Task02\obj\Debug\Task02.csprojResolveAssemblyReference.cache
+C:\Users\1\Desktop\GitReps\EPAM_Ext_Lab_Q2_2017_Likhvar_Dmitriy\HMT_01\Task02\obj\Debug\Task02.exe
+C:\Users\1\Desktop\GitReps\EPAM_Ext_Lab_Q2_2017_Likhvar_Dmitriy\HMT_01\Task02\obj\Debug\Task02.pdb

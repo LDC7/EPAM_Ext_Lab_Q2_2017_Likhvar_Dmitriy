@@ -15,19 +15,29 @@
         static void Main(string[] args)
         {
             Console.Write("Введите координату x: ");
-            double x = double.Parse(Console.ReadLine());
+            double x;
+            while (!double.TryParse(Console.ReadLine(), out x))
+            {
+                Console.Write("Ошибка!\nВведите координату x: ");
+            }
+
             Console.Write("Введите координату y: ");
-            double y = double.Parse(Console.ReadLine());
+            double y;
+            while (!double.TryParse(Console.ReadLine(), out y))
+            {
+                Console.Write("Ошибка!\nВведите координату y: ");
+            }
+
             Console.Write("Введите букву графика(а-к): ");
             int graphic = Console.Read();
-
+            
             if (CheckPointEntrance(x, y, (char)graphic))
             {
-                Console.WriteLine("Точка (" + x.ToString() + "; " + y.ToString() + ") принадлежит фигуре " + (char)graphic);
+                Console.WriteLine("Точка ({0}; {1}) принадлежит фигуре {2}", x, y, (char)graphic);
             }
             else
             {
-                Console.WriteLine("Точка (" + x.ToString() + "; " + y.ToString() + ") не принадлежит фигуре " + (char)graphic);
+                Console.WriteLine("Точка ({0}; {1}) не принадлежит фигуре {2}", x, y, (char)graphic);
             }
 
             Console.ReadKey();
@@ -39,7 +49,6 @@
             {
                 case 'а':
                     // круг
-                    // У StyleCop странные требования:
                     if (1 >= x * x + y * y)
                     {
                         return true;

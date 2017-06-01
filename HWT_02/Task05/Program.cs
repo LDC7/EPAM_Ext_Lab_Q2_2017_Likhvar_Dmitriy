@@ -1,4 +1,6 @@
-﻿namespace Task05
+﻿using System.Text;
+
+namespace Task05
 {
     using System;
 
@@ -12,7 +14,10 @@
     {
         static void Main(string[] args)
         {
-            int sum = 0;
+	        Console.InputEncoding = Encoding.Unicode;
+	        Console.OutputEncoding = Encoding.Unicode;
+
+			int sum = 0;
 
             for (int i = 3; i < 1000; i += 3)
             {
@@ -24,7 +29,7 @@
                 if (i % 3 != 0) sum += i;
             }
 
-            Console.WriteLine(sum.ToString());
+            Console.WriteLine(sum.ToString());//todo pn хоть бы написал, что за число в консоли, а то мало ли пользователь не поймет.
             Console.ReadKey();
         }
     }

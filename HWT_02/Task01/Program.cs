@@ -1,4 +1,6 @@
-﻿namespace Task01
+﻿using System.Text;
+
+namespace Task01
 {
     using System;
 
@@ -11,8 +13,11 @@
     class Program
     {
         static void Main(string[] args)
-        {            
-            int a, b;
+        {
+	        Console.InputEncoding = Encoding.Unicode;
+	        Console.OutputEncoding = Encoding.Unicode;
+
+			int a, b;
 
             Console.Write("Введите сторону a: ");
             while (!int.TryParse(Console.ReadLine(), out a) || a <= 0)

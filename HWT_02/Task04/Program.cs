@@ -1,4 +1,6 @@
-﻿namespace Task04
+﻿using System.Text;
+
+namespace Task04
 {
     using System;
 
@@ -10,7 +12,10 @@
     {
         static void Main(string[] args)
         {
-            int n;
+	        Console.InputEncoding = Encoding.Unicode;
+	        Console.OutputEncoding = Encoding.Unicode;
+
+			int n;
 
             Console.Write("Введите N: ");
             while (!int.TryParse(Console.ReadLine(), out n))

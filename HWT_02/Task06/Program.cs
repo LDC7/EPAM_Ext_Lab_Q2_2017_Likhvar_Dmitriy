@@ -1,4 +1,6 @@
-﻿namespace Task06
+﻿using System.Text;
+
+namespace Task06
 {
     using System;
     using System.Linq;
@@ -8,7 +10,7 @@
     которая позволяет назначать и удалять текстовой надписи выделение.
     */
 
-    class Program
+    class Program //todo pn очень круто сделал, молодец!
     {
         enum Types
         {
@@ -19,7 +21,10 @@
 
         static void Main(string[] args)
         {
-            int n;
+	        Console.InputEncoding = Encoding.Unicode;
+	        Console.OutputEncoding = Encoding.Unicode;
+
+			int n;
             bool[] flags = new bool[3];
 
             while (true)

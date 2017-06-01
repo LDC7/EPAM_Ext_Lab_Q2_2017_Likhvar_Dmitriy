@@ -1,4 +1,6 @@
-﻿namespace Task01
+﻿using System.Text;
+
+namespace Task01
 {
     using System;
 
@@ -12,9 +14,12 @@
 
     public class Program
     {
-        static void Main(string[] args)
+        static void Main(string[] args)//todo pn хотелось бы, конечно, спрашивать пользователя о том, нужно ли закрывать консоль после прогона метода. 
         {
-            Console.Write("Введите координату x: ");
+	        Console.InputEncoding = Encoding.Unicode;//todo pn без явного задания кодировки будет использована кодировка по умолчанию. Машина, на которой я проверяю настроена на английскую культуру, поэтому кириллические символы отображаются в ней как знаки вопроса. Следует учитывать такое специфичное поведение консоли в следующих заданиях :)/
+	        Console.OutputEncoding = Encoding.Unicode;
+
+			Console.Write("Введите координату x: ");
             double x;
             while (!double.TryParse(Console.ReadLine(), out x))
             {
@@ -33,8 +38,8 @@
             
             if (CheckPointEntrance(x, y, (char)graphic))
             {
-                Console.WriteLine("Точка ({0}; {1}) принадлежит фигуре {2}", x, y, (char)graphic);
-            }
+                Console.WriteLine("Точка ({0}; {1}) принадлежит фигуре {2}", x, y, (char)graphic);//todo pn у тебя здесь и строкой ниже дублируется большая часть сообщения, лучше условие перенести в WriteLine через оператор "? :".
+			}
             else
             {
                 Console.WriteLine("Точка ({0}; {1}) не принадлежит фигуре {2}", x, y, (char)graphic);
@@ -72,7 +77,7 @@
 
                     break;
                 case 'г':
-                    // ромб
+                    // ромб //todo pn неиформативные комментарии здесь и ниже, потому что код разный, а коммент один.
                     if ((y <= x + 1) && (y <= -1 * x + 1) && (y >= x - 1) && (y >= -1 * x - 1))
                     {
                         return true;

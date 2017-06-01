@@ -1,4 +1,6 @@
-﻿namespace Task02
+﻿using System.Text;
+
+namespace Task02
 {
     using System;
 
@@ -12,7 +14,10 @@
     {
         static void Main(string[] args)
         {
-            Console.Write("Введите h: ");
+	        Console.InputEncoding = Encoding.Unicode;
+	        Console.OutputEncoding = Encoding.Unicode;
+
+			Console.Write("Введите h: ");
             double h;
             while (!double.TryParse(Console.ReadLine(), out h))
             {
@@ -20,7 +25,7 @@
             }
 
             double a = Math.Sqrt((Math.Abs(Math.Sin(8 * h)) + 17) / Math.Pow((1 - Math.Sin(4 * h) * Math.Cos(h * h + 18)), 2));
-            Console.WriteLine("a = " + a.ToString());
+            Console.WriteLine("a = " + a.ToString());//todo pn не обязательно приводить к строке, "а" неявно приведется сам. (ниже аналогично)
             double b = 1 - Math.Sqrt(3 / (3 + Math.Abs(Math.Tan(a * h * h) - Math.Sin(a * h))));
             Console.WriteLine("b = " + b.ToString());
             double c = (a * h * h * Math.Sin(b * h)) + (b * h * h * h * Math.Cos(a * h));

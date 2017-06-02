@@ -29,7 +29,7 @@ namespace Task05
                 if (i % 3 != 0) sum += i;
             }
 
-            Console.WriteLine(sum.ToString());//todo pn хоть бы написал, что за число в консоли, а то мало ли пользователь не поймет.
+            Console.WriteLine("Сумма чисел меньше 1000 и кратные 3 или 5 равна " + sum);
             Console.ReadKey();
         }
     }

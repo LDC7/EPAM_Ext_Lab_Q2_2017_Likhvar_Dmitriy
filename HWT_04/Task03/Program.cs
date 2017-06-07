@@ -38,7 +38,7 @@
                 }
 
                 sw.Stop();
-                Console.Write("{0} \t", sw.Elapsed);
+                Console.Write("{0} \t", sw.Elapsed);//todo pn не подписал столбцы при выводом пользователю
 
                 sw.Restart();
 

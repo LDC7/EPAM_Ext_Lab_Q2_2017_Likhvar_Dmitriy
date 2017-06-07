@@ -25,7 +25,7 @@
             Console.WriteLine("Массив из {0} элементов:", arr.Length);
             PrintArr(arr);
             
-            Console.WriteLine("Сумма позитивных элементов равна: {0}", PositiveSum(arr));
+            Console.WriteLine("Сумма позитивных элементов равна: {0}", PositiveSum(arr));//todo pn "позитивных" :)
 
             Console.ReadKey();
         }

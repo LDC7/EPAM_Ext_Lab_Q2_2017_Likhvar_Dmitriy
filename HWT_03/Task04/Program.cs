@@ -29,7 +29,7 @@
             Console.WriteLine("Массив из {0} элементов:", arr.Length);
             PrintArr(arr);
 
-            Console.WriteLine("Сумма элементов на чётных позициях равна: {0:0.00}", EvenSum(arr));
+            Console.WriteLine("Сумма элементов на чётных позициях равна: {0:0.00}", EvenSum(arr));//todo pn ты как бы не генерируешь отрицательные элементы массива
 
             Console.ReadKey();
         }

@@ -36,12 +36,12 @@
         }
     }
 
-    public class Round
+    public class Round//todo pn лучше чтобы в файле был только один класс. Так проще понимать, с чем имеешь дело.
     {
-        public double x = 0, y = 0;
-        protected double r = 0;
+        public double x = 0, y = 0;//todo pn почему не свойствами?  
+        protected double r = 0;//todo pn лучше сделать приватным, потому что это вспомогательное поле и все потомки теоретически должны обращаться к свойству Radius
 
-        public Round()
+		public Round()
         {
         }
 
@@ -60,9 +60,9 @@
                 {
                     return this.r;
                 }
-                else
+                else//todo pn лишний
                 {
-                    Console.WriteLine(Properties.Resources.UNINITIALIZED_RADIUS_STRING);
+                    Console.WriteLine(Properties.Resources.UNINITIALIZED_RADIUS_STRING);//todo pn не очень хорошо что-то в лог писать в геттере или сеттере. Лучше создай какой-нибудь класс или метод и туда всю логику записи в лог перемести.
                     return 0;
                 }
             }
@@ -75,8 +75,8 @@
                 }
                 else
                 {
-                    Console.WriteLine(Properties.Resources.INCORRECT_RADIUS_STRING);
-                }
+                    Console.WriteLine(Properties.Resources.INCORRECT_RADIUS_STRING);//todo pn  Лучше выкидывай исключение и где-нибудь на уровень выше перехватывай и обрабатывай его. Помню, что говорил не использовать исключения, но все таки)
+				}
             }
         }
 
@@ -88,9 +88,9 @@
                 {
                     return 2 * Math.PI * this.r;
                 }
-                else
-                {
-                    Console.WriteLine(Properties.Resources.UNINITIALIZED_RADIUS_STRING);
+				else//todo pn лишний
+				{
+                    Console.WriteLine(Properties.Resources.UNINITIALIZED_RADIUS_STRING);//todo pn тем более у тебя повторяются реакции на исключительные ситуации.
                     return 0;
                 }
             }
@@ -116,8 +116,8 @@
                 {
                     return Math.PI * this.r * this.r;
                 }
-                else
-                {
+				else//todo pn лишний
+				{
                     Console.WriteLine(Properties.Resources.UNINITIALIZED_RADIUS_STRING);
                     return 0;
                 }

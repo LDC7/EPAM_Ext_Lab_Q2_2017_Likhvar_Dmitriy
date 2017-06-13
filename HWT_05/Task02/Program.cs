@@ -38,7 +38,7 @@
 
     public class Triangle
     {
-        private double[] sides = { 1, 1, 1 };
+        private double[] sides = { 1, 1, 1 };//todo pn не лучший вариант задания значений по умолчанию. Лучше использовать константы.
 
         public Triangle()
         {

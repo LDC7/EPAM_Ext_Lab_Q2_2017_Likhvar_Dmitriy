@@ -131,8 +131,8 @@
 
                 return new MyString(newarr);
             }
-            else
-            {
+			else//todo pn лишний. Лучше было бы короткую ветку else выше длинной ветки if разместить.
+			{
                 return string.Empty;
             }
         }

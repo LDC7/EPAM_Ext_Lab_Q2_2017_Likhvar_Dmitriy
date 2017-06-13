@@ -69,7 +69,7 @@
         {
             get
             {
-                return this.name[0];
+                return this.name[0];//todo pn индекс тоже лучше в константу, мало ли что изменится
             }
 
             set
@@ -114,13 +114,13 @@
         {
             get
             {
-                if (this.years == null)
+                if (this.years == null)//todo pn лучше через .HasValue
                 {
                     Console.WriteLine(Properties.Resources.AGE_NOT_SPICIFIED_STRING);
                     return -1;                        
                 }
-                else
-                {
+				else//todo pn лишний
+				{
                     return (int)this.years;
                 }
             }
@@ -139,13 +139,13 @@
         {
             get
             {
-                if (this.birth == null)
-                {
+                if (this.birth == null)//todo pn лучше через .HasValue
+				{
                     Console.WriteLine(Properties.Resources.BIRTHDAY_NOT_SPICIFIED_STRING);
                     return DateTime.Today.AddDays(1);
                 }
-                else
-                {
+				else//todo pn лишний
+				{
                     return (DateTime)this.birth;
                 }
             }
@@ -161,7 +161,7 @@
         {
             get
             {
-                return this.Name + ' ' + this.Surname + ' ' + this.Patronim;
+                return this.Name + ' ' + this.Surname + ' ' + this.Patronim;//todo pn атата string.Format, во-первых. Во-вторых, ты соединяешь строки с символами, нафига тебе лишние операции приведения типов?
             }
         }
     }

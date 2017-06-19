@@ -18,6 +18,8 @@
         {
             Console.InputEncoding = Encoding.Unicode;
             Console.OutputEncoding = Encoding.Unicode;
+
+			//todo pn не увидел как ты инициализируешь объекты игры при первом заходе в игру.
         }
     }
 }

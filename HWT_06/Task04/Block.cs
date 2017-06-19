@@ -2,7 +2,7 @@
 {
     public class Block : GameObject
     {
-        public const bool SeeThrow = false;
+        public const bool SeeThrow = false;//todo pn ты просто скрываешь поле предка, а нужно его использовать (переопределить, реализовать или вызвать). Ниже везде также.
         public const bool AttackThrow = false;
         public const bool Destroyable = true;
     }

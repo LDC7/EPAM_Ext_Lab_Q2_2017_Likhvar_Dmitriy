@@ -2,7 +2,7 @@
 {
     public class Bonus : GameObject
     {
-        public const bool SeeThrow = true;
+        public const bool SeeThrow = true;//todo pn аналогично
         public const bool AttackThrow = true;
         public const bool Destroyable = false;
 

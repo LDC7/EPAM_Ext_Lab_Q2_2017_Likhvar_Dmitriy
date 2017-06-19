@@ -4,7 +4,7 @@
 
     class Round : Circle
     {
-        public type name = (type)5;
+        public type name = (type)5;//todo pn а если измениться enum, то у тебя сразу тип здесь станет неправильным. Используй type.Round
 
         public Round()
         {

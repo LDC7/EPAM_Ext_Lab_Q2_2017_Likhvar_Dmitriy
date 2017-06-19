@@ -2,8 +2,8 @@
 {
     public class GameObject
     {
-        public const bool SeeThrow = false;
-        public const bool AttackThrow = false;
+        public const bool SeeThrow = false;//todo pn аналогично
+		public const bool AttackThrow = false;
         public const bool Destroyable = false;
         public int X, Y;        
 

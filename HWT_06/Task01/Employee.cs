@@ -17,7 +17,7 @@
         {
             get
             {
-                if (this.experience > 0)
+                if (this.experience > 0)//todo pn нет проверки на возраст
                 {
                     return this.experience;
                 }

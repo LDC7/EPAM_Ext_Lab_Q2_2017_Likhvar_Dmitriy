@@ -11,7 +11,7 @@
         {
             if (x1 >= x2 || y1 >= y2)
             {
-                throw new Exception(Properties.Resources.INVALID_PARAMETERS_STRING);
+                throw new Exception(Properties.Resources.INVALID_PARAMETERS_STRING);//todo pn здесь лучше бы было создать наследника от Exception или использовать ArgumentException (или что-то типа этого)
             }
 
             p1 = new Point(x1, y1);

@@ -10,7 +10,7 @@
     считать одинаковыми. В качестве разделителей считать пробел и точку.
     */
 
-    public class Program
+    public class Program//todo pn а как же у пользователя ввод строки запросить?
     {
         public static void Main(string[] args)
         {

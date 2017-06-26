@@ -12,7 +12,7 @@
 
         public void Came(Person p, DateTime dt)
         {
-            Console.WriteLine("*** Пришёл {0}!", p.Name);
+            Console.WriteLine("*** Пришёл {0}!", p.Name);//todo pn так, в отдельном классе не должно быть зависимостей от других классов (в твоём случае от класса вывода данных)
             OnCame(p, dt);
             list.Add(p);
             Hello += p.Hello;

@@ -24,7 +24,7 @@
             Console.InputEncoding = Encoding.Unicode;
             Console.OutputEncoding = Encoding.Unicode;
 
-            Person[] princes = {
+            Person[] princes = { //todo pn православненько
                 new Person("Рюрик"),
                 new Person("Олег"),
                 new Person("Игорь"),

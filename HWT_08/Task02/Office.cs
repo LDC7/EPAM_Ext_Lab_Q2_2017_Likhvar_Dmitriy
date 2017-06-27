@@ -12,7 +12,7 @@
 
         public void Came(Person p, DateTime dt)
         {
-            Console.WriteLine("*** Пришёл {0}!", p.Name);//todo pn так, в отдельном классе не должно быть зависимостей от других классов (в твоём случае от класса вывода данных)
+            p.Coming();
             OnCame(p, dt);
             list.Add(p);
             Hello += p.Hello;
@@ -21,7 +21,7 @@
 
         public void Gone(Person p)
         {
-            Console.WriteLine("*** {0} ушёл!", p.Name);            
+            p.Leaving();       
             Hello -= p.Hello;
             Bye -= p.Bye;
             OnGone(p);

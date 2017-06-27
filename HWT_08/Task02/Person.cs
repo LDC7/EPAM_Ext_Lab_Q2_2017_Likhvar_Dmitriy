@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class Person
+    public class Person : IConsole
     {
         public string Name;
 
@@ -15,21 +15,36 @@
         {
             if (((TimeEventArgs)e).time.Hour < 12)
             {
-                Console.WriteLine("Доброе утро, {0}. - сказал {1}", ((Person)p).Name, this.Name);
+                Print("Доброе утро, {0}. - сказал {1}", ((Person)p).Name, this.Name);
             }
             else if (((TimeEventArgs)e).time.Hour < 17)
             {
-                Console.WriteLine("Добрый день, {0}. - сказал {1}", ((Person)p).Name, this.Name);
+                Print("Добрый день, {0}. - сказал {1}", ((Person)p).Name, this.Name);
             }
             else
             {
-                Console.WriteLine("Добрый вечер, {0}. - сказал {1}", ((Person)p).Name, this.Name);
+                Print("Добрый вечер, {0}. - сказал {1}", ((Person)p).Name, this.Name);
             }
         }
 
         public void Bye(object p, EventArgs e)
         {
-            Console.WriteLine("Пока, {0}. - сказал {1}", ((Person)p).Name, this.Name);
+            Print("Пока, {0}. - сказал {1}", ((Person)p).Name, this.Name);
+        }
+
+        public void Coming()
+        {
+            Print("*** Пришёл {0}!", this.Name);
+        }
+
+        public void Leaving()
+        {
+            Print("*** {0} ушёл!", this.Name);
+        }      
+
+        public void Print(string format, params string[] strs)
+        {
+            Console.WriteLine(format, strs);
         }
     }
 }

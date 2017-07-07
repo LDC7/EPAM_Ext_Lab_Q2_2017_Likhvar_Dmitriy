@@ -22,7 +22,7 @@
             Console.WriteLine("{0} is PositiveInteger - {1}", str, str.PositiveInteger());
             str = "-1";
             Console.WriteLine("{0} is PositiveInteger - {1}", str, str.PositiveInteger());
-            str = "1.15";
+            str = "0";
             Console.WriteLine("{0} is PositiveInteger - {1}", str, str.PositiveInteger());
 
             Console.ReadKey();

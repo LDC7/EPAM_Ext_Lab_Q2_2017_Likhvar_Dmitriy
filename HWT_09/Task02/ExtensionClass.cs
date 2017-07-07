@@ -7,7 +7,7 @@
             var enumer = str.GetEnumerator();
             while (enumer.MoveNext())
             {
-                if (!char.IsDigit(enumer.Current))
+                if (!char.IsDigit(enumer.Current))//todo pn некорректно работает при 0
                 {
                     return false;
                 }

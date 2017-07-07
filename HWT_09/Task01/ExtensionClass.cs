@@ -2,7 +2,7 @@
 {
     public static class ExtensionClass
     {
-        public static double Sum(this double[] arr)
+        public static double Sum(this double[] arr)//todo pn a обобщенные типы мы не проходили?
         {
             double sum = 0;
             foreach (double i in arr)

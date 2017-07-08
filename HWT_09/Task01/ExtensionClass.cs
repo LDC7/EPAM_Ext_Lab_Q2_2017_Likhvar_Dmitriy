@@ -1,24 +1,15 @@
 ﻿namespace Task01
 {
+    using System;
+
     public static class ExtensionClass
     {
-        public static double Sum(this double[] arr)//todo pn a обобщенные типы мы не проходили?
+        public static double Sum<T>(this T[] arr) where T : IConvertible
         {
             double sum = 0;
-            foreach (double i in arr)
+            foreach (T i in arr)
             {
-                sum += i;
-            }
-
-            return sum;
-        }
-
-        public static long Sum(this int[] arr)
-        {
-            long sum = 0;
-            foreach (int i in arr)
-            {
-                sum += i;
+                sum += Convert.ToDouble(i);
             }
 
             return sum;

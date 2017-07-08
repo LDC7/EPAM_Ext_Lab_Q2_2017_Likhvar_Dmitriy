@@ -4,6 +4,7 @@
     {
         public static bool PositiveInteger(this string str)
         {
+            bool isNil = true;
             var enumer = str.GetEnumerator();
             while (enumer.MoveNext())
             {
@@ -11,6 +12,15 @@
                 {
                     return false;
                 }
+                if (enumer.Current != '0')
+                {
+                    isNil = false;
+                }
+            }
+
+            if(isNil)
+            {
+                return false;
             }
 
             return true;

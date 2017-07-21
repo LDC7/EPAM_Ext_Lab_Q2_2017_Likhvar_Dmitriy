@@ -22,17 +22,19 @@ CREATE PROCEDURE GreatestOrders
 	@Year int,
 	@Num int
 AS
-	SELECT TOP(@Num) CONCAT(e.FirstName, ' ', e.LastName) 'Seller',
-		(SELECT TOP 1 (o2.OrderID)
-			FROM Orders o2
-			WHERE o2.EmployeeID = e.EmployeeID
-		) 'Order number',
-		MAX(od.Quantity * (od.UnitPrice - (od.UnitPrice * od.Discount))) 'Price'
-	FROM Employees e
-	JOIN Orders o ON e.EmployeeID = o.EmployeeID
-	JOIN [Order Details] od ON od.OrderID = o.OrderID
-	WHERE YEAR(o.OrderDate) = @Year AND od.OrderID = o.OrderID
-	GROUP BY e.EmployeeID, CONCAT(e.FirstName, ' ', e.LastName)
+	SELECT TOP(@Num) nt.Seller, o2.OrderID, nt.Price
+	FROM (
+		SELECT e.EmployeeID,
+			CONCAT(e.FirstName, ' ', e.LastName) 'Seller',
+			MAX(od.Quantity * (od.UnitPrice - (od.UnitPrice * od.Discount)))'Price'
+		FROM Employees e
+		JOIN Orders o ON o.EmployeeID = e.EmployeeID
+		JOIN [Order Details] od ON od.OrderID = o.OrderID
+		WHERE YEAR(o.OrderDate) = @Year
+		GROUP BY e.EmployeeID, CONCAT(e.FirstName, ' ', e.LastName)
+	) nt, Orders o2
+	JOIN [Order Details] od2 ON od2.OrderID = o2.OrderID
+	WHERE o2.EmployeeID = nt.EmployeeID AND (od2.Quantity * (od2.UnitPrice - (od2.UnitPrice * od2.Discount))) = nt.Price
 	ORDER BY 'Price' DESC
 GO
 

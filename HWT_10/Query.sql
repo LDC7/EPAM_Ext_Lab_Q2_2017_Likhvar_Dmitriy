@@ -157,22 +157,20 @@ ORDER BY 'Amount'
 --ID продавца и покупателя. Результаты запроса должны быть упорядочены по продавцу, покупателю и по убыванию количества
 --продаж. В результатах должна быть сводная информация по продажам. Т.е. в резульирующем наборе должны присутствовать
 --дополнительно к информации о продажах продавца для каждого покупателя следующие строчки
---//Какой специальный оператор?
 SELECT
-	CASE WHEN GROUPING(o.EmployeeID) = 1 THEN 'ALL'
-		ELSE e.LastName
-		END 'Seller',
-	CASE WHEN GROUPING(o.CustomerID) = 1 THEN 'ALL'
+	CASE WHEN GROUPING(CONCAT(LastName, ' ', FirstName)) = 1 THEN 'ALL'
+		ELSE CONCAT(LastName, ' ', FirstName)
+	END 'Seller',
+	CASE WHEN GROUPING(c.CompanyName) = 1 THEN 'ALL'
 		ELSE c.CompanyName
-		END 'Customer',
+	END 'Customer',
 	COUNT(o.EmployeeID) 'Amount'
 FROM Orders o
 JOIN Customers c ON c.CustomerID = o.CustomerID
 JOIN Employees e ON e.EmployeeID = o.EmployeeID
 WHERE YEAR(OrderDate) = 1998
-GROUP BY CUBE(o.EmployeeID, o.CustomerID)
+GROUP BY CUBE(CONCAT(LastName, ' ', FirstName), c.CompanyName)
 ORDER BY 'Seller', 'Customer', 'Amount'
------------------------------------------------------------------------------------------------------------------------------------------------
 
 --6.4
 --Найти покупателей и продавцов, которые живут в одном городе. Если в городе живут только один или несколько продавцов или
@@ -282,17 +280,16 @@ ORDER BY 'ABC'
 --колонки: имя продавца, номер заказа, сумму заказа. Проверочный запрос не должен повторять запрос, написанный в процедуре, - он
 --должен выполнять только то, что описано в требованиях по нему. ВСЕ ЗАПРОСЫ ПО ВЫЗОВУ ПРОЦЕДУР ДОЛЖНЫ БЫТЬ
 --НАПИСАНЫ В ФАЙЛЕ Query.sql – см. пояснение ниже в разделе «Требования к оформлению».
-EXEC dbo.GreatestOrders 1997, 10
---Проверка по Маргарет (id = 4)
+EXEC dbo.GreatestOrders 1998, 10
+--Проверка по Нэнси (id = 1)
 SELECT e.FirstName, e.LastName, o.OrderID, (od.Quantity * (od.UnitPrice - (od.UnitPrice * od.Discount))) 'Price'
 FROM Employees e
 JOIN Orders o ON o.EmployeeID = e.EmployeeID
 JOIN [Order Details] od ON od.OrderID = o.OrderID
-WHERE e.EmployeeID = 4 AND YEAR(o.OrderDate) = 1997
+WHERE e.EmployeeID = 1 AND YEAR(o.OrderDate) = 1998
 ORDER BY 'Price' DESC
---//Не верный id. Нет идей.----------------------------------------------------------------------------------------------------------------------
 
---13.4
+--13.2
 --Написать процедуру, которая возвращает заказы в таблице Orders, согласно указанному сроку доставки в днях
 --(разница между OrderDate и ShippedDate). В результатах должны быть возвращены заказы, срок которых превышает переданное
 --значение или еще недоставленные заказы. Значению по умолчанию для передаваемого срока 35 дней. Название

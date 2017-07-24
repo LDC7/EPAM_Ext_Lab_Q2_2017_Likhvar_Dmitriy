@@ -178,21 +178,36 @@ ORDER BY 'Seller', 'Customer', 'Amount'
 --набор. Ќе использовать конструкцию JOIN. ¬ результатах запроса необходимо вывести следующие заголовки дл€ результатов
 --запроса: СPersonТ, СTypeТ (здесь надо выводить строку СCustomerТ или СSellerТ в завимости от типа записи), СCityТ. ќтсортировать
 --результаты запроса по колонке СCityТ и по СPersonТ.
-SELECT ContactName 'Person', 'Customer' 'Type', City 'City'
-FROM Customers
+
+SELECT DISTINCT c.CompanyName 'Person', 'Customer' 'Type', c.City 'City'
+FROM Customers c
+WHERE c.City IN (
+	SELECT DISTINCT City
+	FROM Employees
+	)
 UNION
-SELECT LastName, 'Seller', City
-FROM Employees
+SELECT DISTINCT CONCAT(e.LastName, ' ', e.FirstName) 'Person', 'Seller' 'Type', e.City 'City'
+FROM Employees e
+WHERE e.City IN (
+	SELECT DISTINCT City
+	FROM Customers
+	)
 ORDER BY 'City', 'Person'
------------------------------------------------------------------------------------------------------------------------------------------------
 
 --6.5
 --Ќайти всех покупателей, которые живут в одном городе. ¬ запросе использовать соединение таблицы Customers c собой -
 --самосоединение. ¬ысветить колонки CustomerID и City. «апрос не должен высвечивать дублируемые записи. ƒл€ проверки написать
 --запрос, который высвечивает города, которые встречаютс€ более одного раза в таблице Customers. Ёто позволит проверить
 --правильность запроса.
---//Ќе €сно как должен выгл€деть результат.
------------------------------------------------------------------------------------------------------------------------------------------------
+SELECT DISTINCT c1.CustomerID, c2.City
+FROM Customers c1
+JOIN Customers c2 ON c1.City = c2.City
+WHERE c1.CustomerID != c2.CustomerID
+--ѕроверка
+SELECT c.City,  COUNT(c.City)
+FROM Customers c
+GROUP BY c.City
+HAVING COUNT(c.City) > 1
 
 --6.6
 --ѕо таблице Employees найти дл€ каждого продавца его руководител€, т.е. кому он делает репорты. ¬ысветить колонки с

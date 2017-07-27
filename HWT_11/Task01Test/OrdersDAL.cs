@@ -1,10 +1,10 @@
-﻿namespace Task01
-{
-    using System.Data.Common;
-    using System.Data;
-    using System;
-    using System.Collections.Generic;
+﻿using System.Data.Common;
+using System.Data;
+using System;
+using System.Collections.Generic;
 
+namespace Task01
+{
     class OrdersDAL
     {
         private string connectionString;

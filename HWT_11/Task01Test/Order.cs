@@ -1,7 +1,7 @@
-﻿namespace Task01
-{
-    using System;
+﻿using System;
 
+namespace Task01
+{ 
     enum Status {
         NewOrder,
         InProgress,

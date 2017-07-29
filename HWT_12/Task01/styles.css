@@ -1,0 +1,25 @@
+body
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+.menu
+{
+     border-radius: 10px;
+     border: solid 1px black;
+     background: #fae498;
+     box-shadow: 5px 5px 0px #910007;
+     width: 200px;
+     color: #7d1500;
+}
+
+.menu ul 
+{
+    padding: 5px;
+}
+
+.menu li 
+{
+    list-style-type: none;
+}

@@ -1,0 +1,62 @@
+body
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+.authenticator
+{
+     border: solid 2px #0075b2;
+     background: #0690cf;
+     width: 350px;
+     color: #ffffff;
+}
+
+.authenticator > p
+{
+    margin: 10px 0px 1px 15px;
+    font-size: 19pt;
+}
+
+.authenticator hr
+{
+    border: 1px solid #5ab5df;
+    color: #ffffff;
+    background-color: #ffffff;
+    height: 1px;
+}
+
+.inputdiv
+{
+    margin: 15px;
+    padding-right: 30px;
+}
+
+.inputdiv input
+{
+    width: 96%;
+}
+
+.inputdiv div
+{
+    display:inline-block;
+    width: 45%;
+    margin-right: 12px;
+}
+
+.inputdiv div input
+{
+    width: 100%;
+}
+
+.password
+{
+    width: 49%;
+}
+
+.inputdiv + button
+{
+    border: none;
+    margin: 10px 0px 15px 15px;
+    background: #ffdf7f;
+}

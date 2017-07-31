@@ -52,14 +52,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Order.cs" />
     <Compile Include="OrderDALTest.cs" />
-    <Compile Include="OrdersDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Task01\Task01.csproj">
-      <Project>{db8c8a69-f0ca-4572-8914-b3a7c05e603d}</Project>
+      <Project>{ac021218-944e-4181-b006-9a0f1bba2b0a}</Project>
       <Name>Task01</Name>
     </ProjectReference>
   </ItemGroup>

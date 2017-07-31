@@ -5,7 +5,7 @@
     using System;
     using System.Collections.Generic;
 
-    class OrdersDAL
+    public class OrdersDAL
     {
         private string connectionString;
         private DbProviderFactory factory;

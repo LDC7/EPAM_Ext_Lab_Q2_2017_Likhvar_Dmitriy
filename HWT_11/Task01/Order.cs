@@ -2,13 +2,13 @@
 {
     using System;
 
-    enum Status {
+    public enum Status {
         NewOrder,
         InProgress,
         Done
     };
 
-    class Order
+    public class Order
     {
         public int? OrderID;
         public int? CustomerID;

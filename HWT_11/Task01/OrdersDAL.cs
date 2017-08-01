@@ -4,7 +4,7 @@
     using System.Data;
     using System;
     using System.Collections.Generic;
-
+    using System.Data.SqlClient;
     public class OrdersDAL
     {
         private string connectionString;
@@ -16,10 +16,23 @@
             factory = fac;
         }
 
+        public bool CheckConnection()
+        {
+            bool flag;
+            using (var connection = factory.CreateConnection())
+            {
+                connection.ConnectionString = connectionString;
+                connection.Open();
+                flag = true;
+                connection.Close();
+            }
+            return flag;
+        }
+
         //добавить новый заказ в базу
         public int Insert(Order order)
         {
-            int newid;
+            decimal newid;
             using (var connection = factory.CreateConnection())
             {
                 connection.ConnectionString = connectionString;
@@ -32,31 +45,47 @@
                 {
                     com.CommandText = string.Format("INSERT INTO [dbo].[Orders] ([CustomerID],[EmployeeID]" +
                     ",[OrderDate],[RequiredDate],[ShippedDate],[ShipVia],[Freight],[ShipName]" +
-                    ",[ShipAddress],[ShipCity],[ShipRegion],[ShipPostalCode],[ShipCountry])" +
-                    "VALUES ({0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}" +
-                    "SELECT @@IDENTITY",
-                    order.CustomerID, order.EmployeeID,
-                    order.OrderDate, order.RequiredDate, order.ShippedDate, order.ShipVia, order.Freight, order.ShipName,
-                    order.ShipAddress, order.ShipCity, order.ShipRegion, order.ShipPostalCode, order.ShipCountry
+                    ",[ShipAddress],[ShipCity],[ShipRegion],[ShipPostalCode],[ShipCountry]) " +
+                    "VALUES (@customerId,@employeeId,@orderDate,@requiredDate,@shippedDate,@shipVia" +
+                    ",@Freight,@shipName,@shipAddress,@shipCity,@shipRegion,@shipPostalCode,@shipCountry) " +
+                    "SELECT @@IDENTITY"
                     );
                 }
                 else
                 {
-                    com.CommandText = string.Format("INSERT INTO [dbo].[Orders] ([OrderID],[CustomerID],[EmployeeID]" +
+                    com.CommandText = string.Format("SET IDENTITY_INSERT [dbo].[Orders] ON; " +
+                    "INSERT INTO [dbo].[Orders] ([OrderID],[CustomerID],[EmployeeID]" +
                     ",[OrderDate],[RequiredDate],[ShippedDate],[ShipVia],[Freight],[ShipName]" +
-                    ",[ShipAddress],[ShipCity],[ShipRegion],[ShipPostalCode],[ShipCountry])" +
-                    "VALUES ({0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}" +
-                    "SELECT @@IDENTITY",
-                    order.OrderID, order.CustomerID, order.EmployeeID,
-                    order.OrderDate, order.RequiredDate, order.ShippedDate, order.ShipVia, order.Freight, order.ShipName,
-                    order.ShipAddress, order.ShipCity, order.ShipRegion, order.ShipPostalCode, order.ShipCountry
+                    ",[ShipAddress],[ShipCity],[ShipRegion],[ShipPostalCode],[ShipCountry]) " +
+                    "VALUES (@orderId,@customerId,@employeeId,@orderDate,@requiredDate,@shippedDate,@shipVia" +
+                    ",@Freight,@shipName,@shipAddress,@shipCity,@shipRegion,@shipPostalCode,@shipCountry) " +
+                    "SELECT @@IDENTITY " +
+                    "SET IDENTITY_INSERT [dbo].[Orders] OFF;"
                     );
+
+                    com.Parameters.Add(DBParam("@orderId", order.OrderID));
                 }
 
-                newid = (int)com.ExecuteScalar();
+                
+                com.Parameters.Add(DBParam("@customerId", order.CustomerID));
+                com.Parameters.Add(DBParam("@employeeId", order.EmployeeID));
+                com.Parameters.Add(DBParam("@orderDate", order.OrderDate));
+                com.Parameters.Add(DBParam("@requiredDate", order.RequiredDate));
+                com.Parameters.Add(DBParam("@shippedDate", order.ShippedDate));
+                com.Parameters.Add(DBParam("@shipVia", order.ShipVia));
+                com.Parameters.Add(DBParam("@Freight", order.Freight));
+                com.Parameters.Add(DBParam("@shipName", order.ShipName));
+                com.Parameters.Add(DBParam("@shipAddress", order.ShipAddress));
+                com.Parameters.Add(DBParam("@shipCity", order.ShipCity));
+                com.Parameters.Add(DBParam("@shipRegion", order.ShipRegion));
+                com.Parameters.Add(DBParam("@shipPostalCode", order.ShipPostalCode));
+                com.Parameters.Add(DBParam("@shipCountry", order.ShipCountry));
+
+                //com.ExecuteNonQuery();
+                newid = (decimal)com.ExecuteScalar();
                 connection.Close();
             }
-            return newid;
+            return (int)newid;
         }
 
         //обновить заказ (пр ID)
@@ -72,16 +101,32 @@
 
                 if (order.OrderID != null)
                 {
-                    com.CommandText = string.Format("UPDATE [dbo].[Orders]" +
-                    "SET [CustomerID] = {0},[EmployeeID] = {1}" +
-                    ",[OrderDate] = {2},[RequiredDate] = {3},[ShippedDate] = {4},[ShipVia] = {5},[Freight] = {6}" +
-                    ",[ShipName] = {7},[ShipAddress] = {8},[ShipCity] = {9},[ShipRegion] = {10}" +
-                    ",[ShipPostalCode] = {11},[ShipCountry] = {12} WHERE [OrderID] = {13}",
+                    com.CommandText = string.Format("UPDATE [dbo].[Orders] " +
+                    "SET [CustomerID] = @customerId,[EmployeeID] = @employeeId" +
+                    ",[OrderDate] = @orderDate,[RequiredDate] = @requiredDate,[ShippedDate] = @shippedDate" +
+                    ",[ShipVia] = @shipVia,[Freight] = @Freight,[ShipName] = @shipName,[ShipAddress] = @shipAddress" +
+                    ",[ShipCity] = @shipCity,[ShipRegion] = @shipRegion,[ShipPostalCode] = @shipPostalCode" +
+                    ",[ShipCountry] = @shipCountry WHERE [OrderID] = @orderId",
                     order.CustomerID, order.EmployeeID,
                     order.OrderDate, order.RequiredDate, order.ShippedDate, order.ShipVia, order.Freight,
                     order.ShipName, order.ShipAddress, order.ShipCity, order.ShipRegion,
                     order.ShipPostalCode, order.ShipCountry, order.OrderID
                     );
+
+                    com.Parameters.Add(DBParam("@customerId", order.CustomerID));
+                    com.Parameters.Add(DBParam("@employeeId", order.EmployeeID));
+                    com.Parameters.Add(DBParam("@orderDate", order.OrderDate));
+                    com.Parameters.Add(DBParam("@requiredDate", order.RequiredDate));
+                    com.Parameters.Add(DBParam("@shippedDate", order.ShippedDate));
+                    com.Parameters.Add(DBParam("@shipVia", order.ShipVia));
+                    com.Parameters.Add(DBParam("@Freight", order.Freight));
+                    com.Parameters.Add(DBParam("@shipName", order.ShipName));
+                    com.Parameters.Add(DBParam("@shipAddress", order.ShipAddress));
+                    com.Parameters.Add(DBParam("@shipCity", order.ShipCity));
+                    com.Parameters.Add(DBParam("@shipRegion", order.ShipRegion));
+                    com.Parameters.Add(DBParam("@shipPostalCode", order.ShipPostalCode));
+                    com.Parameters.Add(DBParam("@shipCountry", order.ShipCountry));
+                    com.Parameters.Add(DBParam("@orderId", order.OrderID));
 
                     com.ExecuteNonQuery();
                 }
@@ -101,7 +146,7 @@
                 var com = connection.CreateCommand();
                 com.CommandType = CommandType.Text;
 
-                com.CommandText = string.Format("DELETE FROM [dbo].[Orders]" +
+                com.CommandText = string.Format("DELETE FROM [dbo].[Orders] " +
                 "WHERE [OrderID] = {0}", id
                 );
 
@@ -122,16 +167,20 @@
                 var com = connection.CreateCommand();
                 com.CommandType = CommandType.Text;
 
-                com.CommandText = string.Format("Select * FROM [dbo].[Orders]" +
+                com.CommandText = string.Format("Select * FROM [dbo].[Orders] " +
                 "WHERE [OrderID] = {0}", id
                 );
-
+                
                 using (IDataReader reader = com.ExecuteReader())
                 {
                     reader.Read();
-                    buf = new Order((int)reader["OrderID"], (int)reader["CustomerID"], (int)reader["EmployeeID"], (decimal)reader["Freight"], (DateTime)reader["OrderDate"],
-                        (DateTime)reader["ShippedDate"], (DateTime)reader["RequiredDate"], (int)reader["ShipVia"], (string)reader["ShipName"], (string)reader["ShipAddress"],
-                        (string)reader["ShipCity"], (string)reader["ShipRegion"], (string)reader["ShipPostalCode"], (string)reader["ShipCountry"]);
+                    buf = new Order(checkOnDBNull<int>(reader["OrderID"]), checkOnDBNull<string>(reader["CustomerID"]),
+                        checkOnDBNull<int>(reader["EmployeeID"]), checkOnDBNull<decimal>(reader["Freight"]),
+                        checkOnDBNull<DateTime?>(reader["OrderDate"]), checkOnDBNull<DateTime?>(reader["ShippedDate"]),
+                        checkOnDBNull<DateTime?>(reader["RequiredDate"]), checkOnDBNull<int>(reader["ShipVia"]),
+                        checkOnDBNull<string>(reader["ShipName"]), checkOnDBNull<string>(reader["ShipAddress"]),
+                        checkOnDBNull<string>(reader["ShipCity"]), checkOnDBNull<string>(reader["ShipRegion"]),
+                        checkOnDBNull<string>(reader["ShipPostalCode"]), checkOnDBNull<string>(reader["ShipCountry"]));
                 }
 
                 com.ExecuteNonQuery();
@@ -168,9 +217,13 @@
                     for (int i = 0; i < n; i++)
                     {
                         reader.Read();
-                        buf[i] = new Order((int)reader["OrderID"], (int)reader["CustomerID"], (int)reader["EmployeeID"], (decimal)reader["Freight"], (DateTime)reader["OrderDate"],
-                        (DateTime)reader["ShippedDate"], (DateTime)reader["RequiredDate"], (int)reader["ShipVia"], (string)reader["ShipName"], (string)reader["ShipAddress"],
-                        (string)reader["ShipCity"], (string)reader["ShipRegion"], (string)reader["ShipPostalCode"], (string)reader["ShipCountry"]);
+                        buf[i] = new Order(checkOnDBNull<int>(reader["OrderID"]), checkOnDBNull<string>(reader["CustomerID"]),
+                            checkOnDBNull<int>(reader["EmployeeID"]), checkOnDBNull<decimal>(reader["Freight"]),
+                            checkOnDBNull<DateTime?>(reader["OrderDate"]), checkOnDBNull<DateTime?>(reader["ShippedDate"]),
+                            checkOnDBNull<DateTime?>(reader["RequiredDate"]), checkOnDBNull<int>(reader["ShipVia"]),
+                            checkOnDBNull<string>(reader["ShipName"]), checkOnDBNull<string>(reader["ShipAddress"]),
+                            checkOnDBNull<string>(reader["ShipCity"]), checkOnDBNull<string>(reader["ShipRegion"]),
+                            checkOnDBNull<string>(reader["ShipPostalCode"]), checkOnDBNull<string>(reader["ShipCountry"]));
                     }
                 }
 
@@ -182,7 +235,7 @@
         }
 
         //кол-во заказаных продуктов для покупателя
-        public List<Tuple<string, int>> CustOrderHist(int customerId)
+        public List<Tuple<string, int>> CustOrderHist(string customerId)
         {
             var list = new List<Tuple<string, int>>();  //да. требует тайных знаний, но плодить классы не хочется
 
@@ -193,13 +246,16 @@
 
                 var com = connection.CreateCommand();
                 com.CommandType = CommandType.StoredProcedure;
-                com.CommandText = string.Format("CustOrderHist {0}", customerId);
+                com.CommandText = "CustOrderHist";
+                //com.CommandType = CommandType.Text;
+                //com.CommandText = string.Format("EXEC [dbo].[CustOrderHist] {0}", customerId);
+                com.Parameters.Add(DBParam("CustomerID", customerId));
 
                 using (IDataReader reader = com.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        list.Add(new Tuple<string, int>((string)reader["ProductName"], (int)reader["Quantity"]));
+                        list.Add(new Tuple<string, int>(checkOnDBNull<string>(reader["ProductName"]), checkOnDBNull<int>(reader["Total"])));
                     }
                 }
             }
@@ -208,9 +264,9 @@
         }
 
         //Подробная информация о цене заказа
-        public List<Tuple<string, decimal, int, decimal, decimal>> CustOrderDetail(int orderId)
+        public List<Tuple<string, decimal, Int16, int, decimal>> CustOrderDetail(int orderId)
         {
-            var list = new List<Tuple<string, decimal, int, decimal, decimal>>();
+            var list = new List<Tuple<string, decimal, Int16, int, decimal>>();
 
             using (var connection = factory.CreateConnection())
             {
@@ -219,14 +275,16 @@
 
                 var com = connection.CreateCommand();
                 com.CommandType = CommandType.StoredProcedure;
-                com.CommandText = string.Format("CustOrderDetail {0}", orderId);
+                com.CommandText = "CustOrdersDetail";
+                com.Parameters.Add(DBParam("OrderID", orderId));
 
                 using (IDataReader reader = com.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        list.Add(new Tuple<string, decimal, int, decimal, decimal>((string)reader["ProductName"], (decimal)reader["UnitPrice"],
-                            (int)reader["Quantity"], (decimal)reader["Discount"], (decimal)reader["ExtendedPrice"]));
+                        list.Add(new Tuple<string, decimal, Int16, int, decimal>(checkOnDBNull<string>(reader["ProductName"]),
+                            checkOnDBNull<decimal>(reader["UnitPrice"]), checkOnDBNull<Int16>(reader["Quantity"]),
+                            checkOnDBNull<int>(reader["Discount"]), checkOnDBNull<decimal>(reader["ExtendedPrice"])));
                     }
                 }
             }
@@ -235,9 +293,9 @@
         }
 
         //полная информация(возвращает суперобъект)
-        public Tuple<Order, List<Tuple<string, decimal, int, decimal, decimal>>> FullInfo(int orderId)
+        public Tuple<Order, List<Tuple<string, decimal, Int16, int, decimal>>> FullInfo(int orderId)
         {
-            return new Tuple<Order, List<Tuple<string, decimal, int, decimal, decimal>>>(Select(orderId), CustOrderDetail(orderId));
+            return new Tuple<Order, List<Tuple<string, decimal, Int16, int, decimal>>>(Select(orderId), CustOrderDetail(orderId));
         }
 
         //передать в работу
@@ -251,7 +309,10 @@
                 var com = connection.CreateCommand();
                 com.CommandType = CommandType.Text;
 
-                com.CommandText = string.Format("UPDATE [dbo].[Orders] SET [OrderDate] = {0} WHERE [OrderID] = {1}", date, orderId);
+                com.CommandText = string.Format("UPDATE [dbo].[Orders] SET [OrderDate] = @orderDate WHERE [OrderID] = @orderId");
+
+                com.Parameters.Add(DBParam("@orderDate", date));
+                com.Parameters.Add(DBParam("@orderId", orderId));
 
                 com.ExecuteNonQuery();
 
@@ -270,12 +331,34 @@
                 var com = connection.CreateCommand();
                 com.CommandType = CommandType.Text;
 
-                com.CommandText = string.Format("UPDATE [dbo].[Orders] SET [ShippedDate] = {0} WHERE [OrderID] = {1}", date, orderId);
+                com.CommandText = string.Format("UPDATE [dbo].[Orders] SET [ShippedDate] = @shippedDate WHERE [OrderID] = @orderId");
+
+                com.Parameters.Add(DBParam("@shippedDate", date));
+                com.Parameters.Add(DBParam("@orderId", orderId));
 
                 com.ExecuteNonQuery();
-
+                
                 connection.Close();
             }
+        }
+
+        private T checkOnDBNull<T>(object obj)
+        {
+            if (obj == DBNull.Value)
+            {
+                return default(T);
+            }
+            else
+            {
+                return (T)obj;
+            }
+        }
+
+        private IDbDataParameter DBParam(string str, object obj)
+        {
+            if (obj == null) obj = DBNull.Value;
+            IDbDataParameter dbparam = new SqlParameter(str, obj);
+            return dbparam;
         }
     }
 }

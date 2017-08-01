@@ -11,11 +11,11 @@
     public class Order
     {
         public int? OrderID;
-        public int? CustomerID;
+        public string CustomerID;
         public int? EmployeeID;
-        public DateTime OrderDate;
-        public DateTime RequiredDate;
-        public DateTime ShippedDate;
+        public DateTime? OrderDate;
+        public DateTime? RequiredDate;
+        public DateTime? ShippedDate;
         public int? ShipVia;
         public decimal? Freight;
         public string ShipName;
@@ -27,7 +27,7 @@
 
         public Status status;
         
-        public Order(int? orderId, int customerId, int employeeId, decimal freight)
+        public Order(int? orderId, string customerId, int employeeId, decimal freight)
         {
             this.OrderID = orderId;
             this.CustomerID = customerId;
@@ -37,7 +37,7 @@
             status = Status.NewOrder;
         }
 
-        public Order(int? orderId, int customerId, int employeeId, decimal freight, DateTime orderDate, DateTime shippedDate)
+        public Order(int? orderId, string customerId, int employeeId, decimal freight, DateTime? orderDate, DateTime? shippedDate)
         {
             this.OrderID = orderId;
             this.CustomerID = customerId;
@@ -49,7 +49,7 @@
             this.CheckStatus();
         }
 
-        public Order(int? orderId, int customerId, int employeeId, decimal freight, DateTime orderDate, DateTime shippedDate, DateTime requiredDate,
+        public Order(int? orderId, string customerId, int employeeId, decimal freight, DateTime? orderDate, DateTime? shippedDate, DateTime? requiredDate,
             int? shipVia, string shipName, string shipAddress, string shipCity, string shipRegion, string shipPostalCode, string shipCountry)
         {
             this.OrderID = orderId;

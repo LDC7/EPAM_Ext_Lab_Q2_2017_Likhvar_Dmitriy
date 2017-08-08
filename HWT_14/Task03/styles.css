@@ -1,0 +1,26 @@
+body > div
+{
+    display: flex;
+}
+
+body div
+{
+    margin: 5px;
+    padding: 5px;
+}
+
+div > button
+{
+    display: flex;
+    width: 30px;
+}
+
+button
+{
+    margin: 2px;
+}
+
+select
+{
+    width: 200px;
+}

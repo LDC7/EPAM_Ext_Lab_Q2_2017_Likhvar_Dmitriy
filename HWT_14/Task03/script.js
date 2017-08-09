@@ -32,44 +32,64 @@ function func(arr1, arr2) {
     button4.innerHTML = '<<';
 
     button1.onclick = function () {
-        while (box1.array.length > 0) {
-            box2.array.push(box1.array[0]);
-            box1.array.splice(0, 1);
+        if (box1.textBox.options.length == 0) {
+            alert('Empty Box!');
         }
-        box1.reload();
-        box2.reload();
+        else {
+            while (box1.array.length > 0) {
+                box2.array.push(box1.array[0]);
+                box1.array.splice(0, 1);
+            }
+            box1.reload();
+            box2.reload();
+        }
     }
     button2.onclick = function () {
-        var bufarr = [];
-        for (var i = box1.textBox.options.length - 1; i >= 0; i--) {
-            if (box1.textBox.options[i].selected) {
-                bufarr.unshift(box1.array[i]);
-                box1.array.splice(i, 1);
-            }
+        if (box1.textBox.options.length == 0) {
+            alert('Empty Box!');
         }
-        box2.array = box2.array.concat(bufarr);
-        box1.reload();
-        box2.reload();
+        else {
+            var bufarr = [];
+            for (var i = box1.textBox.options.length - 1; i >= 0; i--) {
+                if (box1.textBox.options[i].selected) {
+                    bufarr.unshift(box1.array[i]);
+                    box1.array.splice(i, 1);
+                }
+            }
+            box2.array = box2.array.concat(bufarr);
+            box1.reload();
+            box2.reload();
+        }
     }
     button3.onclick = function () {
-        var bufarr = [];
-        for (var i = box2.textBox.options.length - 1; i >= 0; i--) {
-            if (box2.textBox.options[i].selected) {
-                bufarr.unshift(box2.array[i]);
-                box2.array.splice(i, 1);
-            }
+        if (box2.textBox.options.length == 0) {
+            alert('Empty Box!');
         }
-        box1.array = box1.array.concat(bufarr);
-        box1.reload();
-        box2.reload();
+        else {
+            var bufarr = [];
+            for (var i = box2.textBox.options.length - 1; i >= 0; i--) {
+                if (box2.textBox.options[i].selected) {
+                    bufarr.unshift(box2.array[i]);
+                    box2.array.splice(i, 1);
+                }
+            }
+            box1.array = box1.array.concat(bufarr);
+            box1.reload();
+            box2.reload();
+        }
     }
     button4.onclick = function () {
-        while (box2.array.length > 0) {
-            box1.array.push(box2.array[0]);
-            box2.array.splice(0, 1);
+        if (box2.textBox.options.length == 0) {
+            alert('Empty Box!');
         }
-        box1.reload();
-        box2.reload();
+        else {
+            while (box2.array.length > 0) {
+                box1.array.push(box2.array[0]);
+                box2.array.splice(0, 1);
+            }
+            box1.reload();
+            box2.reload();
+        }
     }
 
     buttonDiv.appendChild(button1);

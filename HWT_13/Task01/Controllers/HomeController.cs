@@ -41,8 +41,10 @@ namespace Task01.Controllers
             var dalOrder = Dal.Select(id);
             var order = new Models.FullOrderModel();
 
-            order.OrderID = dalOrder.OrderID;            
+            order.OrderID = dalOrder.OrderID;
+
             order.EmployeeID = dalOrder.EmployeeID;
+            order.EmployeeName = Dal.EmployeeName(dalOrder.EmployeeID);
 
             order.CustomerID = dalOrder.CustomerID;
             order.CustomerName = Dal.CustomerName(dalOrder.CustomerID);
@@ -69,6 +71,15 @@ namespace Task01.Controllers
             //order.Discount;
 
             return View(order);
+        }
+
+        public ActionResult Editing(int id, string field, string value)
+        {
+            ViewData["OrderId"] = id;
+            ViewData["Field"] = field;
+            ViewData["Value"] = value;
+
+            return PartialView("Partial/EditTextBox");
         }
 
         public ActionResult About()

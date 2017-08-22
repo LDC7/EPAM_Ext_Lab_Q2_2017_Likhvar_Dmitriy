@@ -342,7 +342,7 @@
         }
 
         //название продукта
-        public string ProductName(int productId)
+        public string ProductName(int? productId)
         {
             string name;
             using (var connection = factory.CreateConnection())
@@ -376,6 +376,28 @@
                 com.CommandType = CommandType.Text;
                 com.CommandText = string.Format("Select CompanyName FROM [dbo].[Customers] " +
                 "WHERE [CustomerID] = '{0}'", customerId
+                );
+                name = (string)com.ExecuteScalar();
+
+                connection.Close();
+            }
+
+            return name;
+        }
+
+        //имя сотрудника
+        public string EmployeeName(int? employeeId)
+        {
+            string name;
+            using (var connection = factory.CreateConnection())
+            {
+                connection.ConnectionString = connectionString;
+                connection.Open();
+
+                var com = connection.CreateCommand();
+                com.CommandType = CommandType.Text;
+                com.CommandText = string.Format("Select CONCAT(e.LastName, ' ', e.FirstName) FROM [dbo].[Employees] e " +
+                "WHERE [EmployeeID] = {0}", employeeId
                 );
                 name = (string)com.ExecuteScalar();
 

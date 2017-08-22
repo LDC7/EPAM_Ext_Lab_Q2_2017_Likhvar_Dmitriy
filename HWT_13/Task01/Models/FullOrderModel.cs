@@ -9,7 +9,9 @@ namespace Task01.Models
     public class FullOrderModel
     {
         public int? OrderID { get; set; }
+
         public int? EmployeeID { get; set; }
+        public string EmployeeName { get; set; }
 
         public string CustomerID { get; set; }
         public string CustomerName { get; set; }
@@ -29,10 +31,12 @@ namespace Task01.Models
         public string ShipCountry { get; set; }
         public decimal? Freight { get; set; }
 
-        public int ProductID { get; set; }
-        public string ProductName { get; set; }
-        public decimal UnitPrice { get; set; }
-        public Int16 Quantity { get; set; }
-        public double Discount { get; set; }
+        //public int ProductID { get; set; }
+        //public string ProductName { get; set; }
+        //public decimal UnitPrice { get; set; }
+        //public Int16 Quantity { get; set; }
+        //public double Discount { get; set; }
+        public Tuple<int, string, decimal, Int16, double>[] Details { get; set; }
+        public double Price { get; set; }
     }
 }

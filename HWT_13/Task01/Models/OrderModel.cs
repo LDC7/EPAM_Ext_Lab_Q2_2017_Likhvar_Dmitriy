@@ -23,7 +23,5 @@ namespace Task01.Models
         public Status status { get; set; }
         [Display(Name = "Стоимость доставки")]
         public decimal? Freight { get; set; }
-        [Display(Name = "Цена")]
-        public decimal Price { get; set; }
     }
 }

@@ -12,6 +12,11 @@
         @Html.DisplayFor(model => model.OrderID)
     </h4>
     <hr />
+
+    <div id="modDialog" class="modal fade">
+        <div id="dialogContent" class="modal-dialog"></div>
+    </div>
+
     <table class="table">
         <tr>
             <th>
@@ -21,7 +26,6 @@
                 @Html.DisplayFor(model => model.OrderID)
             </th>
             <th>
-                @Html.DisplayFor(model => model.OrderID)
             </th>
          </tr>
         <tr>
@@ -31,6 +35,20 @@
             <th>
                 @Html.DisplayFor(model => model.EmployeeID)
             </th>
+            <th>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.EmployeeName)
+            </th>
+            <th>
+                @Html.ActionLink("Редактировать", "Editing", new { id = Model.OrderID, field = @Html.NameFor(model => model.EmployeeName),
+               value = Model.EmployeeID}, new { @class = "openModalView" })
+            </th>
         </tr>
         <tr>
             <th>
@@ -38,6 +56,8 @@
             </th>
             <th>
                 @Html.DisplayFor(model => model.CustomerID)
+            </th>
+            <th>
             </th>
         </tr>
         <tr>
@@ -47,6 +67,10 @@
             <th>
                 @Html.DisplayFor(model => model.CustomerName)
             </th>
+            <th>
+                @Html.ActionLink("Редактировать", "Editing", new { id = Model.OrderID, field = @Html.NameFor(model => model.CustomerName),
+               value = Model.CustomerID }, new { @class = "openModalView" })
+            </th>
         </tr>
         <tr>
             <th>
@@ -54,6 +78,8 @@
             </th>
             <th>
                 @Html.DisplayFor(model => model.OrderDate)
+            </th>
+            <th>
             </th>
         </tr>
         <tr>
@@ -63,6 +89,10 @@
             <th>
                 @Html.DisplayFor(model => model.RequiredDate)
             </th>
+            <th>
+                @Html.ActionLink("Редактировать", "Editing", new { id = Model.OrderID, field = @Html.NameFor(model => model.RequiredDate),
+               value = Model.RequiredDate }, new { @class = "openModalView" })
+            </th>
         </tr>
         <tr>
             <th>
@@ -70,6 +100,10 @@
             </th>
             <th>
                 @Html.DisplayFor(model => model.ShippedDate)
+            </th>
+            <th>
+                @Html.ActionLink("Редактировать", "Editing", new { id = @Model.OrderID, field = @Html.NameFor(model => model.ShippedDate),
+               value = Model.ShippedDate }, new { @class = "openModalView" })
             </th>
         </tr>
         <tr>
@@ -79,6 +113,8 @@
             <th>
                 @Html.DisplayFor(model => model.status)
             </th>
+            <th>
+            </th>
         </tr>
         <tr>
             <th>
@@ -86,6 +122,10 @@
             </th>
             <th>
                 @Html.DisplayFor(model => model.ShipVia)
+            </th>
+            <th>
+                @Html.ActionLink("Редактировать", "Editing", new { id = @Model.OrderID, field = @Html.NameFor(model => model.ShipVia),
+               value = Model.ShipVia }, new { @class = "openModalView" })
             </th>
         </tr>
         <tr>
@@ -95,6 +135,10 @@
             <th>
                 @Html.DisplayFor(model => model.ShipName)
             </th>
+            <th>
+                @Html.ActionLink("Редактировать", "Editing", new { id = @Model.OrderID, field = @Html.NameFor(model => model.ShipName),
+               value = Model.ShipName}, new { @class = "openModalView" })
+            </th>
         </tr>
         <tr>
             <th>
@@ -102,6 +146,10 @@
             </th>
             <th>
                 @Html.DisplayFor(model => model.ShipAddress)
+            </th>
+            <th>
+                @Html.ActionLink("Редактировать", "Editing", new { id = @Model.OrderID, field = @Html.NameFor(model => model.ShipAddress),
+               value = Model.ShipAddress }, new { @class = "openModalView" })
             </th>
         </tr>
         <tr>
@@ -111,6 +159,10 @@
             <th>
                 @Html.DisplayFor(model => model.ShipCity)
             </th>
+            <th>
+                @Html.ActionLink("Редактировать", "Editing", new { id = @Model.OrderID, field = @Html.NameFor(model => model.ShipCity),
+               value = Model.ShipCity }, new { @class = "openModalView" })
+            </th>
         </tr>
         <tr>
             <th>
@@ -118,6 +170,10 @@
             </th>
             <th>
                 @Html.DisplayFor(model => model.ShipRegion)
+            </th>
+            <th>
+                @Html.ActionLink("Редактировать", "Editing", new { id = @Model.OrderID, field = @Html.NameFor(model => model.ShipRegion),
+               value = Model.ShipRegion }, new { @class = "openModalView" })
             </th>
         </tr>
         <tr>
@@ -127,6 +183,10 @@
             <th>
                 @Html.DisplayFor(model => model.ShipPostalCode)
             </th>
+            <th>
+                @Html.ActionLink("Редактировать", "Editing", new { id = @Model.OrderID, field = @Html.NameFor(model => model.ShipPostalCode),
+               value = Model.ShipPostalCode }, new { @class = "openModalView" })
+            </th>
         </tr>
         <tr>
             <th>
@@ -134,6 +194,10 @@
             </th>
             <th>
                 @Html.DisplayFor(model => model.ShipCountry)
+            </th>
+            <th>
+                @Html.ActionLink("Редактировать", "Editing", new { id = @Model.OrderID, field = @Html.NameFor(model => model.ShipCountry),
+               value = Model.ShipCountry }, new { @class = "openModalView" })
             </th>
         </tr>
         <tr>
@@ -143,13 +207,29 @@
             <th>
                 @Html.DisplayFor(model => model.Freight)
             </th>
+            <th>
+                @Html.ActionLink("Редактировать", "Editing", new { id = @Model.OrderID, field = @Html.NameFor(model => model.Freight),
+               value = Model.Freight }, new { @class = "openModalView" })
+            </th>
         </tr>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.Price)
+            </th>
+            <th>
+            </th>
+        </tr>
+        @*<tr>
             <th>
                 @Html.DisplayNameFor(model => model.ProductID)
             </th>
             <th>
                 @Html.DisplayFor(model => model.ProductID)
+            </th>
+            <th>
             </th>
         </tr>
         <tr>
@@ -159,6 +239,9 @@
             <th>
                 @Html.DisplayFor(model => model.ProductName)
             </th>
+            <th>
+                @Html.ActionLink("Редактировать", "Creating", null, new { @class = "openModalView" })
+            </th>
         </tr>
         <tr>
             <th>
@@ -166,6 +249,9 @@
             </th>
             <th>
                 @Html.DisplayFor(model => model.UnitPrice)
+            </th>
+            <th>
+                @Html.ActionLink("Редактировать", "Creating", null, new { @class = "openModalView" })
             </th>
         </tr>
         <tr>
@@ -175,6 +261,9 @@
             <th>
                 @Html.DisplayFor(model => model.Quantity)
             </th>
+            <th>
+                @Html.ActionLink("Редактировать", "Creating", null, new { @class = "openModalView" })
+            </th>
         </tr>
         <tr>
             <th>
@@ -183,10 +272,19 @@
             <th>
                 @Html.DisplayFor(model => model.Discount)
             </th>
-        </tr>
+            <th>
+                @Html.ActionLink("Редактировать", "Creating", null, new { @class = "openModalView" })
+            </th>
+        </tr>*@
 
     </table>
 </div>
 <p>
     @Html.ActionLink("Назад к списку", "Index")
 </p>
+
+
+@section scripts
+{
+    @Scripts.Render("~/Scripts/ModalView.js")
+}

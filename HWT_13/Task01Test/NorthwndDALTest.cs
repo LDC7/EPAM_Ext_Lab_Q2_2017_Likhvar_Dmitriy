@@ -109,5 +109,13 @@
             var actual = DAL.CustomerName("ANTON");
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void Test_EmployeeName()
+        {
+            var expected = "Peacock Margaret";
+            var actual = DAL.EmployeeName(4);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

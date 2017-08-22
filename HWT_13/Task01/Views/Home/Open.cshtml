@@ -1,0 +1,192 @@
+﻿@model Task01.Models.FullOrderModel
+
+@{
+    ViewBag.Title = "Информация о заказе";
+}
+
+<h2>Open</h2>
+
+<div>
+    <h4>
+        Заказ №
+        @Html.DisplayFor(model => model.OrderID)
+    </h4>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderID)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.OrderID)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.OrderID)
+            </th>
+         </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeID)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.EmployeeID)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerID)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.CustomerID)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.CustomerName)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.OrderDate)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RequiredDate)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.RequiredDate)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShippedDate)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.ShippedDate)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.status)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipVia)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.ShipVia)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipName)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.ShipName)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipAddress)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.ShipAddress)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipCity)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.ShipCity)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipRegion)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.ShipRegion)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipPostalCode)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.ShipPostalCode)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipCountry)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.ShipCountry)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Freight)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.Freight)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductID)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.ProductID)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.ProductName)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.UnitPrice)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.Quantity)
+            </th>
+        </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount)
+            </th>
+            <th>
+                @Html.DisplayFor(model => model.Discount)
+            </th>
+        </tr>
+
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Назад к списку", "Index")
+</p>

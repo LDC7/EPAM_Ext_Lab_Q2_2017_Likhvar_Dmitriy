@@ -28,7 +28,7 @@ function func(str) {
     return buf;
 }
 
-function Main() {
+function Main() {//todo pn интерактив с пользователем, конечно, был бы лучше
     document.write("<pre>");
     document.writeln('abc');
     document.writeln(func('abc'));

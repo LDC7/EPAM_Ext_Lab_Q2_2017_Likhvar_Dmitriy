@@ -147,7 +147,7 @@
                 com.CommandType = CommandType.Text;
 
                 com.CommandText = string.Format("DELETE FROM [dbo].[Orders] " +
-                "WHERE [OrderID] = {0}", id
+                "WHERE [OrderID] = {0}", id//todo pn не очень хорошо, лучше через параметры
                 );
 
                 com.ExecuteNonQuery();
@@ -168,8 +168,8 @@
                 com.CommandType = CommandType.Text;
 
                 com.CommandText = string.Format("Select * FROM [dbo].[Orders] " +
-                "WHERE [OrderID] = {0}", id
-                );
+                "WHERE [OrderID] = {0}", id//todo pn не очень хорошо, лучше через параметры
+				);
                 
                 using (IDataReader reader = com.ExecuteReader())
                 {
